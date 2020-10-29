@@ -105,8 +105,12 @@ class Lodash extends React.Component {
         words: ["just", "one", "paragraph"]
       }
     ];
-    const titles = _.map(data, (value, key) => _.upperFirst(_.lowerCase(key)));
-    const options = _.map(titles, (index, value) => [index, value]);
+    const titles = _.chain(data)
+      .map((value, key) => key)
+      .map(value => _.lowerCase(value))
+      .map(value => _.upperFirst(value))
+      .value();
+    const options = _.map(titles, (value, index) => [index, value]);
     const currentArticle = temporaryArticles[this.state.articleIndex];
     return (
       <>
