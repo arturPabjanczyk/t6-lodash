@@ -73,38 +73,6 @@ class Lodash extends React.Component {
   };
 
   render() {
-    const temporaryArticles = [
-      {
-        title: "First article",
-        paragraphs: [
-          "This is a sentence. And a second sentence",
-          "This is a start of a new paragraph"
-        ],
-        words: [
-          "this",
-          "is",
-          "a",
-          "sentence",
-          "and",
-          "a",
-          "second",
-          "sentence",
-          "this",
-          "is",
-          "a",
-          "start",
-          "of",
-          "a",
-          "new",
-          "paragraph"
-        ]
-      },
-      {
-        title: "Second article",
-        paragraphs: ["Just one paragraph"],
-        words: ["just", "one", "paragraph"]
-      }
-    ];
     const titles = _.chain(data)
       .map((value, key) => key)
       .map(_.lowerCase)
@@ -138,10 +106,9 @@ class Lodash extends React.Component {
       .map(([title, paragraphs, words]) => (
         {title, paragraphs, words}
       ))
-      .tap(console.log)
       .value();
     const options = _.map(titles, (value, index) => [index, value]);
-    const currentArticle = temporaryArticles[this.state.articleIndex];
+    const currentArticle = articles[this.state.articleIndex];
     return (
       <>
         <Select
