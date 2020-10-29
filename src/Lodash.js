@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 
 const data = {
   "lorem-ipsum": [
@@ -146,18 +147,7 @@ function Article({ title, paragraphs }) {
   );
 }
 function UniqueWords({ words }) {
-  const uniqueWords = [
-    "a",
-    "and",
-    "is",
-    "new",
-    "of",
-    "paragraph",
-    "second",
-    "sentence",
-    "start",
-    "this"
-  ];
+  const uniqueWords = _.uniq(words);
   return (
     <ul>
       {uniqueWords.map(word => (
