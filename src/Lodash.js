@@ -134,6 +134,9 @@ class Lodash extends React.Component {
         .value()
       )
       .value();
+    const articles = _.chain(_.zip(titles, paragraphs, words))
+      .tap(console.log)
+      .value();
     const options = _.map(titles, (value, index) => [index, value]);
     const currentArticle = temporaryArticles[this.state.articleIndex];
     return (
