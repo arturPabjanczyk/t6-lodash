@@ -124,6 +124,16 @@ class Lodash extends React.Component {
         .value()
       )
       .value();
+    const words = _.chain(data)
+      .map(article => _.chain(article)
+        .flatten()
+        .flatMap(sentence => _.chain(sentence)
+          .words()
+          .value()
+        )
+        .value()
+      )
+      .value();
     const options = _.map(titles, (value, index) => [index, value]);
     const currentArticle = temporaryArticles[this.state.articleIndex];
     return (
