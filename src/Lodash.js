@@ -111,14 +111,25 @@ class Lodash extends React.Component {
       .map(_.upperFirst)
       .value();
     const paragraphs = _.chain(data)
-      .tap(console.log)
+      .map(article => _.chain(article)
+        .map(paragraph => _.chain(paragraph)
+          .map(sentence => _.chain(sentence)
+            .upperFirst()
+            .thru(value => value + ".")
+            .value()
+          )
+          .join(" ")
+          .value()
+        )
+        .value()
+      )
       .value();
     const options = _.map(titles, (value, index) => [index, value]);
     const currentArticle = temporaryArticles[this.state.articleIndex];
     return (
       <>
         <Select
-          onChange={articleIndex => this.setState({ articleIndex })}
+          onChange={articleIndex => this.setState({articleIndex})}
           options={options}
         />
         <h1>The article</h1>
@@ -127,13 +138,13 @@ class Lodash extends React.Component {
           paragraphs={currentArticle.paragraphs}
         />
         <h1>Unique words</h1>
-        <UniqueWords words={currentArticle.words} />
+        <UniqueWords words={currentArticle.words}/>
       </>
     );
   }
 }
 
-function Select({ options, onChange }) {
+function Select({options, onChange}) {
   return (
     <select onChange={event => onChange(event.target.value)}>
       {options.map(option => (
@@ -144,7 +155,8 @@ function Select({ options, onChange }) {
     </select>
   );
 }
-function Article({ title, paragraphs }) {
+
+function Article({title, paragraphs}) {
   return (
     <article>
       <h2>{title}</h2>
@@ -154,7 +166,8 @@ function Article({ title, paragraphs }) {
     </article>
   );
 }
-function UniqueWords({ words }) {
+
+function UniqueWords({words}) {
   const uniqueWords = _.uniq(words);
   return (
     <ul>
@@ -164,4 +177,5 @@ function UniqueWords({ words }) {
     </ul>
   );
 }
+
 export default Lodash;
