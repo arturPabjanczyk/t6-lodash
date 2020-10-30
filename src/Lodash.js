@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import WordCount from "./WordCount";
 
 const data = {
   "lorem-ipsum": [
@@ -121,8 +122,9 @@ class Lodash extends React.Component {
           paragraphs={currentArticle.paragraphs}
         />
         <h1>Unique words</h1>
-        <UniqueWords words={currentArticle.words}/>
-      </>
+        {/*<UniqueWords words={currentArticle.words}/>*/}
+        <WordCount wordsFromArticle={currentArticle.words}/>
+        </>
     );
   }
 }
